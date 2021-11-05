@@ -7,18 +7,14 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- <form action="http://localhost:3000/upload" enctype="multipart/form-data" method="POST">
-    <input type="file" name="photo" />
-    <input type="submit" />
-  </form> -->
-  <form method="POST" action="http://localhost:3000/upload" enctype="multipart/form-data">
-    <div>
-        <label>Select your profile picture:</label>
-        <input type="file" name="profile_pic" value="test" />
-    </div>
-    <div>
-        <input type="submit" name="btn_upload_profile_pic" value="upload" />
-    </div>
-</form>
+  <!-- http://localhost:3000/upload -->
+  <form action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
+    Select an image to upload:
+    <input type="file" name="image"> 
+    <input type="submit" value="Upload Image">
+  </form>
+  <form action="http://localhost:3000/upload" method="GET">
+    <input type="submit" value="Get Image">
+  </form>
 </body>
 </html>

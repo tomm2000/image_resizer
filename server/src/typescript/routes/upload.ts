@@ -1,49 +1,55 @@
 import express from 'express'
 import fs from 'fs'
-import path from 'path'
 import multer from 'multer'
-import {imageFilter} from '../helpers/image_thing'
+import { file_resize, run_script } from '../helpers/pythonAPI';
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-      cb(null, 'uploads/');
-  },
-
-  // By default, multer removes file extensions so let's add them back
-  filename: function(req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  destination: function (req, file, cb) {
+      cb(null, `${global.uploads_dir}`);
+    },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
   }
 });
 
-export function get(app, route) {
-// export function get(app: express.Express, route: string) {
+const uploadImg = multer({storage: storage}).single('image');
+
+export function post(app: express.Application, route: string) {
   console.log(`[INFO] laoded route: ${route}`)
 
-  app.post(route, (req, res) => {
-    // 'profile_pic' is the name of our file input field in the HTML form
-    let upload = multer({ storage: storage, fileFilter: imageFilter }).single('profile_pic');
-    
-    console.log(req)
+  app.post(route, uploadImg, (req, res) => {
 
-    upload(req, res, function(err) {
-        // req.file contains information of uploaded file
-        // req.body contains information of text fields, if there were any
+    //TODO: remove unecessary files!!
+    // let converting_files = fs.readdirSync(`${global.uploads_dir}`)
+    // for(let file of converting_files) {
+    //   if(file != 'converted'){
+    //     fs.unlink(`${global.uploads_dir}\\${file}`, () => {})
+    //   }
+    // }
 
-        if (req.fileValidationError) {
-            return res.send(req.fileValidationError);
-        }
-        else if (!req.file) {
-            return res.send('Please select an image to upload');
-        }
-        else if (err instanceof multer.MulterError) {
-            return res.send(err);
-        }
-        else if (err) {
-            return res.send(err);
-        }
+    // let converted_files = fs.readdirSync(`${global.uploads_dir}\\converted`)
+    // for(let file of converted_files) {
+    //   fs.unlink(`${global.uploads_dir}\\converted\\${file}`, () => {})
+    // }
 
-        // Display uploaded image for user validation
-        res.send(`You have uploaded this image: <hr/><img src="${req.file.path}" width="500"><hr /><a href="./">Upload another image</a>`);
-    });
+    // console.log(files)
+
+
+    file_resize(`${global.home_dir}\\python\\main.py`, `${global.uploads_dir}`, 9, 16, (out) => {
+      let files = fs.readdirSync(`${global.uploads_dir}\\converted`)
+
+      if(files.length > 0) {
+        // console.log(`sending: ${global.uploads_dir}\\converted\\${files[0]}`)
+        // res.sendFile(`${global.uploads_dir}\\converted\\conv_${files[0]}`)
+        res.send('success!')
+      } else {
+        res.send('error!')
+      }
+    })
+  })
+
+  app.get(route, (req, res) => {
+    let files = fs.readdirSync(`${global.uploads_dir}\\converted`)
+    res.sendFile(`${global.uploads_dir}\\converted\\${files[0]}`)
   })
 }

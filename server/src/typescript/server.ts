@@ -1,7 +1,7 @@
 import express from 'express';
 import { path } from './config/const';
 import { findFiles } from './helpers/fileFinder';
-import { spawn } from 'child_process'
+import { run_script } from './helpers/pythonAPI';
 
 var cors = require('cors')
 
@@ -14,6 +14,8 @@ app.listen(port, () => {
   return console.log(`[INFO] server is listening on ${port}`);
 })
 
+global.home_dir = __dirname;
+global.uploads_dir = `${__dirname}\\uploads`
 
 let folder = `${__dirname}/${path.ROUTES}`
 let routes = findFiles(folder, '', '.js')
@@ -26,20 +28,7 @@ routes.forEach((route) => {
     r.post(app, `${route.path}/${route.name}`)
 })
 
-// var dataToSend;
-// // spawn new child process to call the python script
 
-// const python = spawn('python', [`${__dirname}/../src/python/main.py`]);
 
-// // collect data from script
-// python.stdout.on('data', function (data) {
-//   // console.log('Pipe data from python script ...');
-//   dataToSend = data.toString();
-// });
 
-// // in close event we are sure that stream from child process is closed
-// python.on('close', (code) => {
-//   // console.log(`child process close all stdio with code ${code}`);
-//   // send data to browser
-//   console.log(dataToSend)
-// });
+

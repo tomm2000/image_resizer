@@ -1,5 +1,5 @@
 {
-  "name": "notflix-server",
+  "name": "image_resizer",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -11,9 +11,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "formidable": "^2.0.1",
     "fs": "^0.0.1-security",
-    "nodemon": "^2.0.14",
-    "torrent-search-api": "^2.1.4",
-    "tsc-watch": "^4.5.0"
+    "multer": "^1.4.3"
   }
 }
