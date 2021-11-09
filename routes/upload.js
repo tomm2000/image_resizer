@@ -19,7 +19,14 @@ const uploadImg = multer_1.default({ storage: storage }).single('image');
 function post(app, route) {
     console.log(`[INFO] laoded route: ${route}`);
     app.post(route, uploadImg, (req, res) => {
-        let id = data_1.setUserImages();
+        let w = 9;
+        let h = 16;
+        try {
+            w = parseInt(req.query.imagew);
+            h = parseInt(req.query.imageh);
+        }
+        catch (error) { }
+        let id = data_1.setUserImages(w, h);
         res.send(id);
     });
 }

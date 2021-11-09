@@ -17,11 +17,11 @@ exports.getUserImages = function (user_id) {
         return [];
     }
 };
-exports.setUserImages = function () {
+exports.setUserImages = function (width = 9, height = 16) {
     let id = uuid_1.v4();
     const script_path = `${global.home_dir}/python/main.py`;
     const dest_path = `${global.uploads_dir}/converted/${id}`;
-    pythonAPI_1.file_resize(script_path, `${global.uploads_dir}`, id, 9, 16, (out) => { });
+    pythonAPI_1.file_resize(script_path, `${global.uploads_dir}`, id, width, height, (out) => { });
     return id;
 };
 exports.clearStorage = function () {
