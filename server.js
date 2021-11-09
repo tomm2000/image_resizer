@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const const_1 = require("./config/const");
 const routeAPI_1 = require("./controller/routeAPI");
-const data_1 = require("./model/data");
 var cors = require('cors');
 const app = express_1.default();
 const port = process.env.PORT || 3000;
@@ -16,7 +15,7 @@ app.listen(port, () => {
 });
 global.home_dir = __dirname;
 global.uploads_dir = `${__dirname}\\uploads`;
-data_1.clearStorage();
+// clearStorage()
 let folder = `${__dirname}/${const_1.path.ROUTES}`;
 let routes = routeAPI_1.findRoutes(folder, '', '.js');
 routeAPI_1.openRoutes(app, routes);
