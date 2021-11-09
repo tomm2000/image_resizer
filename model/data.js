@@ -25,16 +25,16 @@ exports.setUserImages = function () {
     return id;
 };
 exports.clearStorage = function () {
-    //TODO: remove unecessary files!!
-    let converting_files = fs_1.default.readdirSync(`${global.uploads_dir}`);
-    for (let file of converting_files) {
-        if (file != 'converted') {
-            fs_1.default.unlink(`${global.uploads_dir}\\${file}`, () => { });
-        }
-    }
-    let converted = fs_1.default.readdirSync(`${global.uploads_dir}\\converted`);
-    converted.forEach((namespace) => {
-        fs_1.default.rmSync(`${global.uploads_dir}\\converted\\${namespace}`, { recursive: true, force: true });
-    });
+    // //TODO: remove unecessary files!!
+    // let converting_files = fs.readdirSync(`${global.uploads_dir}`)
+    // for(let file of converting_files) {
+    //   if(file != 'converted'){
+    //     fs.unlink(`${global.uploads_dir}\\${file}`, () => {})
+    //   }
+    // }
+    // let converted = fs.readdirSync(`${global.uploads_dir}\\converted`)
+    // converted.forEach((namespace) => {
+    //   fs.rmSync(`${global.uploads_dir}\\converted\\${namespace}`, { recursive: true, force: true})
+    // })
 };
 //# sourceMappingURL=data.js.map

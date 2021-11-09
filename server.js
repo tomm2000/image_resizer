@@ -7,7 +7,6 @@ const express_1 = __importDefault(require("express"));
 const const_1 = require("./config/const");
 const routeAPI_1 = require("./controller/routeAPI");
 const data_1 = require("./model/data");
-console.log(express_1.default);
 var cors = require('cors');
 const app = express_1.default();
 const port = process.env.PORT || 3000;
