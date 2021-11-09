@@ -33,7 +33,9 @@ function findRoutes(start, path, extension) {
 exports.findRoutes = findRoutes;
 function openRoutes(app, files) {
     files.forEach((route) => {
-        let r = require(`${global.home_dir}\\${const_1.path.ROUTES}\\${route.path}\\${route.name}${route.extension}`);
+        let p = `${global.home_dir}/${const_1.path.ROUTES}/${route.path}/${route.name}${route.extension}`;
+        console.log(p);
+        let r = require(p);
         if (r.get)
             r.get(app, `${route.path}/${route.name}`);
         if (r.post)
