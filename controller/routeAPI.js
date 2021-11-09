@@ -25,7 +25,7 @@ function findRoutes(start, path, extension) {
             });
         }
         else if (!thing.includes('.')) {
-            files = files.concat(findRoutes(start, `${path}\\${thing}`, extension));
+            files = files.concat(findRoutes(start, `${path}/${thing}`, extension));
         }
     });
     return files;
@@ -33,13 +33,13 @@ function findRoutes(start, path, extension) {
 exports.findRoutes = findRoutes;
 function openRoutes(app, files) {
     files.forEach((route) => {
-        let p = `${global.home_dir}\\${const_1.path.ROUTES}\\${route.path}\\${route.name}${route.extension}`;
+        let p = `${global.home_dir}/${const_1.path.ROUTES}/${route.path}/${route.name}${route.extension}`;
         // console.log(p)
         let r = require(p);
         if (r.get)
-            r.get(app, `${route.path}\\${route.name}`);
+            r.get(app, `${route.path}/${route.name}`);
         if (r.post)
-            r.post(app, `${route.path}\\${route.name}`);
+            r.post(app, `${route.path}/${route.name}`);
     });
 }
 exports.openRoutes = openRoutes;

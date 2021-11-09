@@ -15,9 +15,9 @@ app.listen(port, () => {
     return console.log(`[INFO] server is listening on ${port}`);
 });
 global.home_dir = __dirname;
-global.uploads_dir = `${__dirname}\\uploads`;
+global.uploads_dir = `${__dirname}/uploads`;
 data_1.clearStorage();
-let folder = `${__dirname}\\${const_1.path.ROUTES}`;
+let folder = `${__dirname}/${const_1.path.ROUTES}`;
 let routes = routeAPI_1.findRoutes(folder, '', '.js');
 routeAPI_1.openRoutes(app, routes);
 //# sourceMappingURL=server.js.map

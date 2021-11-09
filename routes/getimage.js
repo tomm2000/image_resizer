@@ -5,8 +5,8 @@ const data_1 = require("../model/data");
 function post(app, route) {
     console.log(`[INFO] laoded route: ${route}`);
     app.get(route, (req, res) => {
-        // let files = fs.readdirSync(`${global.uploads_dir}\\converted`)
-        // res.sendFile(`${global.uploads_dir}\\converted\\${files[0]}`)
+        // let files = fs.readdirSync(`${global.uploads_dir}/converted`)
+        // res.sendFile(`${global.uploads_dir}/converted/${files[0]}`)
         let id = req.query.user_id;
         // console.log(`requested image: ${id}`)
         let files = data_1.getUserImages(id);
